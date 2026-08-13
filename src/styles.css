@@ -1,0 +1,258 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.16 0.008 60);
+  --foreground: oklch(0.97 0.004 90);
+  --surface: oklch(0.21 0.009 60);
+  --surface-2: oklch(0.26 0.012 60);
+  --card: oklch(0.21 0.009 60);
+  --card-foreground: oklch(0.97 0.004 90);
+  --popover: oklch(0.21 0.009 60);
+  --popover-foreground: oklch(0.97 0.004 90);
+  --primary: oklch(0.66 0.21 38);
+  --primary-foreground: oklch(0.14 0.01 60);
+  --secondary: oklch(0.26 0.012 60);
+  --secondary-foreground: oklch(0.97 0.004 90);
+  --muted: oklch(0.26 0.012 60);
+  --muted-foreground: oklch(0.68 0.012 70);
+  --accent: oklch(0.72 0.16 78);
+  --accent-foreground: oklch(0.14 0.01 60);
+  --destructive: oklch(0.6 0.23 27);
+  --destructive-foreground: oklch(0.97 0.004 90);
+  --border: oklch(0.32 0.012 60);
+  --input: oklch(0.32 0.012 60);
+  --ring: oklch(0.66 0.21 38);
+
+  --gradient-ember: linear-gradient(
+    135deg,
+    oklch(0.66 0.21 38),
+    oklch(0.75 0.17 68)
+  );
+  --gradient-fade: linear-gradient(
+    to top,
+    oklch(0.16 0.008 60) 6%,
+    oklch(0.16 0.008 60 / 0.55) 45%,
+    oklch(0.16 0.008 60 / 0.15) 100%
+  );
+  --shadow-ember: 0 18px 50px -18px oklch(0.66 0.21 38 / 0.55);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+}
+
+@utility text-ember {
+  background-image: var(--gradient-ember);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-ember {
+  background-image: var(--gradient-ember);
+}
+
+@utility shadow-ember {
+  box-shadow: var(--shadow-ember);
+}
+
+@utility overlay-fade {
+  background-image: var(--gradient-fade);
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.72rem;
+  color: var(--color-primary);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: radial-gradient(
+      var(--color-foreground) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 4px 4px;
+  }
+}
+
+@utility marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--color-surface) 45%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-foreground) 12%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 12px 40px -20px oklch(0 0 0 / 0.7);
+}
+
+@utility glass-bar {
+  background-color: color-mix(in oklab, var(--color-background) 60%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-foreground) 12%, transparent);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+}
+
+@utility glass-nav {
+  background-color: color-mix(in oklab, var(--color-background) 74%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-foreground) 10%, transparent);
+  backdrop-filter: blur(26px) saturate(165%);
+  -webkit-backdrop-filter: blur(26px) saturate(165%);
+  box-shadow: 0 10px 34px -16px oklch(0 0 0 / 0.6);
+}
+
+@utility glass-chip {
+  background-color: color-mix(in oklab, var(--color-background) 45%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-foreground) 16%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.7rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+@utility glow-orb {
+  position: absolute;
+  top: -22%;
+  left: 12%;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    oklch(0.66 0.21 38 / 0.22),
+    transparent 65%
+  );
+  filter: blur(30px);
+}
+
+@utility glass-hover {
+  position: relative;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background-color 0.4s ease;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: linear-gradient(
+      120deg,
+      color-mix(in oklab, var(--color-foreground) 8%, transparent) 0%,
+      transparent 42%
+    );
+  }
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-foreground) 20%, transparent);
+    box-shadow: 0 18px 46px -24px oklch(0 0 0 / 0.75);
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+@utility nav-solid {
+  background-color: var(--color-background);
+  box-shadow: none;
+}
+
+@utility nav-solid-scrolled {
+  border-bottom: 1px solid color-mix(in oklab, var(--color-foreground) 10%, transparent);
+  box-shadow: 0 12px 30px -14px oklch(0 0 0 / 0.85);
+}
+
+@utility nav-panel {
+  background-color: var(--color-background);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-foreground) 10%, transparent);
+}
+
+.leaflet-container {
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-surface-2);
+  color: var(--color-foreground);
+  border-radius: 0.25rem;
+}
