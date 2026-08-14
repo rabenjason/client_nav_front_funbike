@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import gsap from "gsap";
 import { ArrowUpRight } from "lucide-react";
 import type { Product } from "@/data/products";
 
@@ -8,6 +9,29 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
   const images = product.images.length > 0 ? product.images : [];
   const [index, setIndex] = useState(0);
   const [hover, setHover] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    const media = mediaRef.current;
+    if (!card || !media || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const enter = () => {
+      gsap.to(card, { y: -8, duration: 0.35, ease: "power3.out", overwrite: true });
+      gsap.to(media, { scale: 1.035, duration: 0.65, ease: "power3.out", overwrite: true });
+    };
+    const leave = () => {
+      gsap.to(card, { y: 0, duration: 0.45, ease: "power3.out", overwrite: true });
+      gsap.to(media, { scale: 1, duration: 0.7, ease: "power3.out", overwrite: true });
+    };
+    card.addEventListener("mouseenter", enter);
+    card.addEventListener("mouseleave", leave);
+    return () => {
+      card.removeEventListener("mouseenter", enter);
+      card.removeEventListener("mouseleave", leave);
+      gsap.killTweensOf([card, media]);
+    };
+  }, []);
 
   useEffect(() => {
     if (!hover || images.length < 2) return;
@@ -24,6 +48,7 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -37,7 +62,7 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
         params={{ slug: product.slug }}
         className="glass glass-hover group flex h-full flex-col overflow-hidden rounded-lg"
       >
-        <div className="relative aspect-[4/3] overflow-hidden">
+        <div ref={mediaRef} className="relative aspect-[4/3] overflow-hidden">
           <AnimatePresence mode="sync">
             <motion.img
               key={images[index]}

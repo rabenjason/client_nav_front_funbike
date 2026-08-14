@@ -2,13 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { PageHeader } from "@/components/funbike/PageHeader";
 import { ProductBrowser } from "@/components/funbike/ProductBrowser";
-import { categories, products } from "@/data/products";
+import { categories } from "@/data/products";
+import { getGraphQLProducts } from "@/data/graphql";
 
 const title = "Catalogue complet — Funbike Madagascar";
 const description =
   "Motos, casques, pièces détachées, accessoires et équipements off-road : parcourez tout le catalogue Funbike Madagascar par marque et par type.";
 
 export const Route = createFileRoute("/catalogue")({
+  loader: () => getGraphQLProducts(),
   head: () => ({
     meta: [
       { title },
@@ -23,6 +25,8 @@ export const Route = createFileRoute("/catalogue")({
 });
 
 function CataloguePage() {
+  const products = Route.useLoaderData();
+
   return (
     <div>
       <PageHeader eyebrow="Catalogue" title="Tout le" accent="catalogue">

@@ -45,8 +45,8 @@
   --card-foreground: oklch(0.97 0.004 90);
   --popover: oklch(0.21 0.009 60);
   --popover-foreground: oklch(0.97 0.004 90);
-  --primary: oklch(0.66 0.21 38);
-  --primary-foreground: oklch(0.14 0.01 60);
+  --primary: #ffde00;
+  --primary-foreground: #171717;
   --secondary: oklch(0.26 0.012 60);
   --secondary-foreground: oklch(0.97 0.004 90);
   --muted: oklch(0.26 0.012 60);
@@ -57,20 +57,16 @@
   --destructive-foreground: oklch(0.97 0.004 90);
   --border: oklch(0.32 0.012 60);
   --input: oklch(0.32 0.012 60);
-  --ring: oklch(0.66 0.21 38);
+  --ring: #ffde00;
 
-  --gradient-ember: linear-gradient(
-    135deg,
-    oklch(0.66 0.21 38),
-    oklch(0.75 0.17 68)
-  );
+  --gradient-ember: linear-gradient(135deg, #ffde00, #ffe866);
   --gradient-fade: linear-gradient(
     to top,
     oklch(0.16 0.008 60) 6%,
     oklch(0.16 0.008 60 / 0.55) 45%,
     oklch(0.16 0.008 60 / 0.15) 100%
   );
-  --shadow-ember: 0 18px 50px -18px oklch(0.66 0.21 38 / 0.55);
+  --shadow-ember: 0 18px 50px -18px rgb(255 222 0 / 0.38);
 }
 
 @layer base {
@@ -197,7 +193,7 @@
   pointer-events: none;
   background: radial-gradient(
     circle,
-    oklch(0.66 0.21 38 / 0.22),
+    rgb(255 222 0 / 0.18),
     transparent 65%
   );
   filter: blur(30px);
