@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X } from "lucide-react";
 import { ProductCard } from "./ProductCard";
@@ -24,6 +24,8 @@ export function ProductBrowser({
   const [query, setQuery] = useState("");
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
+  const [page, setPage] = useState(1);
+  const pageSize = 6;
 
   const brands = useMemo(() => brandsOf(items), [items]);
   const types = useMemo(
@@ -34,6 +36,17 @@ export function ProductBrowser({
     () => filterProducts(items, { query, brand, type }),
     [items, query, brand, type],
   );
+
+  const pageCount = Math.max(1, Math.ceil(results.length / pageSize));
+  const visibleResults = results.slice((page - 1) * pageSize, page * pageSize);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, brand, type, items]);
+
+  useEffect(() => {
+    setPage((current) => Math.min(current, pageCount));
+  }, [pageCount]);
 
   const pick = (value: string, current: string, set: (v: string) => void) =>
     set(current === value ? "" : value);
@@ -114,7 +127,7 @@ export function ProductBrowser({
 
       <motion.div layout className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {results.map((p, i) => (
+          {visibleResults.map((p, i) => (
             <motion.div key={p.slug} layout exit={{ opacity: 0, scale: 0.97 }}>
               <ProductCard product={p} delay={(i % 3) * 0.06} />
               {showCategory && (
@@ -124,6 +137,30 @@ export function ProductBrowser({
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {pageCount > 1 && (
+        <nav className="mt-8 flex items-center justify-center gap-4" aria-label="Pagination des produits">
+          <button
+            type="button"
+            onClick={() => setPage((current) => Math.max(1, current - 1))}
+            disabled={page === 1}
+            className="rounded-sm border border-border/70 px-4 py-2 font-display text-xs uppercase tracking-[0.18em] transition-colors hover:border-primary/70 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            Précédent
+          </button>
+          <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            Page {page} / {pageCount}
+          </span>
+          <button
+            type="button"
+            onClick={() => setPage((current) => Math.min(pageCount, current + 1))}
+            disabled={page === pageCount}
+            className="rounded-sm border border-border/70 px-4 py-2 font-display text-xs uppercase tracking-[0.18em] transition-colors hover:border-primary/70 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            Suivant
+          </button>
+        </nav>
+      )}
 
       {results.length === 0 && (
         <p className="glass mt-4 rounded-lg p-10 text-center text-sm text-muted-foreground">

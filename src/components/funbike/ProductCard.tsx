@@ -9,6 +9,7 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
   const images = product.images.length > 0 ? product.images : [];
   const [index, setIndex] = useState(0);
   const [hover, setHover] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const cardRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +63,10 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
         params={{ slug: product.slug }}
         className="glass glass-hover group flex h-full flex-col overflow-hidden rounded-lg"
       >
-        <div ref={mediaRef} className="relative aspect-[4/3] overflow-hidden">
+        <div ref={mediaRef} className="relative aspect-[4/3] overflow-hidden bg-muted/30">
+          {!loadedImages[images[index]] && (
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/70 via-muted/30 to-primary/10" aria-hidden="true" />
+          )}
           <AnimatePresence mode="sync">
             <motion.img
               key={images[index]}
@@ -71,10 +75,15 @@ export function ProductCard({ product, delay = 0 }: { product: Product; delay?: 
               loading="lazy"
               width={1024}
               height={768}
-              initial={{ opacity: 0, scale: 1.06 }}
-              animate={{ opacity: 1, scale: 1 }}
+              onLoad={() => setLoadedImages((current) => ({ ...current, [images[index]]: true }))}
+              initial={{ opacity: 0, scale: 1.06, filter: "blur(12px)" }}
+              animate={{
+                opacity: loadedImages[images[index]] ? 1 : 0,
+                scale: loadedImages[images[index]] ? 1 : 1.06,
+                filter: loadedImages[images[index]] ? "blur(0px)" : "blur(12px)",
+              }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 h-full w-full object-cover"
             />
           </AnimatePresence>

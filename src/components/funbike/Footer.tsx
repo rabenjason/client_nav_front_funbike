@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -40,8 +41,17 @@ export function Footer() {
           <h3 className="text-sm tracking-[0.2em] text-foreground">Showroom</h3>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             Ankorondrano, Antananarivo
-            <br />
-            +261 34 00 000 00
+            <a
+              href="tel:+26134000000"
+              className="mt-3 inline-flex items-center gap-2 rounded-sm border border-emerald-400/50 bg-emerald-400/10 px-3 py-2 text-emerald-300 transition-colors hover:bg-emerald-400/20"
+            >
+              <span className="relative flex size-2" aria-hidden="true">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-300 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-300" />
+              </span>
+              <Phone size={14} aria-hidden="true" />
+              <span>+261 34 00 000 00 · Disponible</span>
+            </a>
             <br />
             contact@funbike.mg
           </p>

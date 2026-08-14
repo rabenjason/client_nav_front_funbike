@@ -2,7 +2,6 @@ import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, FileText } from "lucide-react";
-import { ProductSimulator } from "@/components/funbike/ProductSimulator";
 import { ProductCard } from "@/components/funbike/ProductCard";
 import { findProduct, findCategory, products, type Product } from "@/data/products";
 
@@ -52,7 +51,7 @@ function ProductPage() {
           <ChevronLeft size={14} /> Retour
         </Link>
 
-        <div className="mt-6 grid gap-10 lg:grid-cols-2">
+        <div className="mt-6">
           <div>
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
@@ -140,7 +139,6 @@ function ProductPage() {
             )}
           </div>
 
-          <ProductSimulator product={product} />
         </div>
 
         {related.length > 0 && (
