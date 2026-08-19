@@ -43,7 +43,7 @@ function ProductPage() {
 
   return (
     <div className="pt-32">
-      <div className="mx-auto max-w-7xl px-5">
+      <div className="mx-auto max-w-6xl px-4 sm:px-5">
         <Link
           to={`/${product.category}` as "/motos"}
           className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
@@ -57,7 +57,7 @@ function ProductPage() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="glass relative aspect-[4/3] overflow-hidden rounded-lg"
+              className="glass relative mx-auto aspect-[4/3] w-full max-w-4xl max-h-[min(58vh,620px)] overflow-hidden rounded-lg"
             >
               <AnimatePresence mode="sync">
                 <motion.img
@@ -76,7 +76,7 @@ function ProductPage() {
             </motion.div>
 
             {product.images.length > 1 && (
-              <div className="mt-3 grid grid-cols-4 gap-3">
+              <div className="mx-auto mt-3 grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 md:grid-cols-6">
                 {product.images.map((src, i) => (
                   <button
                     key={src + i}
@@ -90,7 +90,7 @@ function ProductPage() {
                   >
                     <img
                       src={src}
-                      alt=""
+                      alt={`${product.name} — miniature ${i + 1}`}
                       loading="lazy"
                       className="aspect-[4/3] w-full object-cover"
                     />
