@@ -38,7 +38,7 @@ function Index() {
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((c, i) => (
             <motion.div
               key={c.slug}
@@ -50,7 +50,7 @@ function Index() {
             >
               <Link
                 to={`/${c.slug}` as "/motos"}
-                className="group relative block aspect-[3/4] overflow-hidden rounded-lg border border-border/60"
+                className="group relative block aspect-[4/3] overflow-hidden rounded-lg border border-border/60"
               >
                 <motion.img
                   src={c.img}
@@ -63,8 +63,8 @@ function Index() {
                   className="h-full w-full object-cover"
                 />
                 <div className="overlay-fade absolute inset-0" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <h3 className="text-3xl font-bold">{c.title}</h3>
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+                  <h3 className="text-2xl font-bold md:text-[1.7rem]">{c.title}</h3>
                   <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                     {c.sub}
                   </p>

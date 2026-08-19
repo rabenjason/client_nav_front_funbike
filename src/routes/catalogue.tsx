@@ -47,7 +47,7 @@ function CataloguePage() {
             >
               <Link
                 to={`/${c.slug}` as "/motos"}
-                className="group relative block aspect-[3/4] overflow-hidden rounded-lg border border-border/60"
+                className="group relative block aspect-[4/3] overflow-hidden rounded-lg border border-border/60"
               >
                 <motion.img
                   src={c.img}
@@ -60,8 +60,8 @@ function CataloguePage() {
                   className="h-full w-full object-cover"
                 />
                 <div className="overlay-fade absolute inset-0" />
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <h2 className="text-3xl font-bold">{c.title}</h2>
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+                  <h2 className="text-2xl font-bold md:text-[1.7rem]">{c.title}</h2>
                   <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                     {c.sub}
                   </p>
