@@ -59,7 +59,7 @@ function ProductPage() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="glass relative mx-auto aspect-[4/3] w-full max-w-4xl max-h-[min(58vh,620px)] overflow-hidden rounded-lg bg-surface-2"
+              className="glass relative mx-auto flex min-h-56 w-full max-w-5xl items-center justify-center overflow-hidden rounded-lg bg-surface-2 p-2 sm:p-4"
               onMouseMove={(event) => {
                 const bounds = event.currentTarget.getBoundingClientRect();
                 const x = ((event.clientX - bounds.left) / bounds.width) * 100;
@@ -85,8 +85,9 @@ function ProductPage() {
                     transform: `scale(${isZoomed ? 1.8 : 1})`,
                     transformOrigin: zoomOrigin,
                     transition: "transform 420ms cubic-bezier(0.16, 1, 0.3, 1)",
+                    willChange: "transform",
                   }}
-                  className="absolute inset-0 h-full w-full object-contain p-4 sm:p-6"
+                  className="relative block h-auto max-h-[min(65vh,680px)] w-auto max-w-full object-contain"
                 />
               </AnimatePresence>
             </motion.div>
