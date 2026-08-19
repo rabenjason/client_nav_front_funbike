@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-surface/40">
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1fr_0.8fr_0.8fr_1.2fr]">
         <div>
           <img
             src="/logo-funbike.png"
@@ -43,25 +44,29 @@ export function Footer() {
             </li>
           </ul>
         </div>
-        <div>
-          <h3 className="text-sm tracking-[0.2em] text-foreground">Showroom</h3>
-          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            Ankorondrano, Antananarivo
-            <a
-              href="tel:+26134000000"
-              aria-label="Appeler Funbike au +261 34 00 000 00"
-              className="mt-2 inline-flex max-w-full items-center gap-1.5 rounded-sm border border-emerald-400/50 bg-emerald-400/10 px-2 py-1 text-[11px] leading-none text-emerald-300 transition-colors hover:bg-emerald-400/20"
-            >
-              <span className="relative flex size-2" aria-hidden="true">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-300 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-300" />
-              </span>
-              <FontAwesomeIcon icon={faPhone} className="size-3" aria-hidden="true" />
-              <span className="truncate">+261 34 00 000 00 · Disponible</span>
-            </a>
-            <br />
-            contact@funbike.mg
-          </p>
+        <div className="lg:justify-self-end lg:min-w-64">
+          <h3 className="text-sm tracking-[0.2em] text-foreground">Contact</h3>
+          <ul className="mt-4 flex flex-col gap-3 text-xs text-muted-foreground">
+            <li>
+              <a href="tel:+26134000000" className="inline-flex items-center gap-2 transition-colors hover:text-primary">
+                <FontAwesomeIcon icon={faPhone} className="size-3 text-emerald-300" aria-hidden="true" />
+                <span>+261 34 00 000 00</span>
+                <span className="size-1.5 animate-pulse rounded-full bg-emerald-300" aria-label="Disponible" />
+              </a>
+            </li>
+            <li>
+              <a href="mailto:contact@funbike.mg" className="inline-flex items-center gap-2 transition-colors hover:text-primary">
+                <FontAwesomeIcon icon={faEnvelope} className="size-3" aria-hidden="true" />
+                <span>contact@funbike.mg</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/funbike.mg" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-primary">
+                <FontAwesomeIcon icon={faFacebookF} className="size-3" aria-hidden="true" />
+                <span>Facebook</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="border-t border-border/50 py-5 text-center text-xs text-muted-foreground">
