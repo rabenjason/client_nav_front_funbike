@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const links = [
   { label: "Accueil", to: "/" },
@@ -72,7 +74,8 @@ export function Nav() {
             to="/contact"
             className="hidden rounded-sm bg-ember px-5 py-2.5 font-display text-sm font-semibold uppercase tracking-widest text-primary-foreground shadow-ember transition-transform duration-200 hover:scale-[1.04] md:inline-block"
           >
-            Showroom
+            <FontAwesomeIcon icon={faEnvelope} className="mr-2 size-3" aria-hidden="true" />
+            Contact
           </Link>
           <button
             aria-label="Menu"

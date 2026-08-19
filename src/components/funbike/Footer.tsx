@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Phone } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 export function Footer() {
   return (
@@ -21,11 +22,11 @@ export function Footer() {
         </div>
         <div>
           <h3 className="text-sm tracking-[0.2em] text-foreground">Catalogue</h3>
-          <ul className="mt-4 space-y-2 text-xs text-muted-foreground">
+          <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] leading-tight text-muted-foreground">
             <li><Link to="/motos" className="hover:text-primary">Motos</Link></li>
             <li><Link to="/casques" className="hover:text-primary">Casques</Link></li>
-            <li><Link to="/pieces" className="hover:text-primary">Pièces détachées</Link></li>
-            <li><Link to="/equipements" className="hover:text-primary">Équipements</Link></li>
+            <li><Link to="/pieces" className="hover:text-primary">Pièces</Link></li>
+            <li><Link to="/equipements" className="hover:text-primary">Équipement</Link></li>
             <li><Link to="/accessoires" className="hover:text-primary">Accessoires</Link></li>
           </ul>
         </div>
@@ -34,7 +35,12 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-xs text-muted-foreground">
             <li><Link to="/catalogue" className="hover:text-primary">Tout le catalogue</Link></li>
             <li><Link to="/revendeurs" className="hover:text-primary">Revendeurs</Link></li>
-            <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
+            <li>
+              <Link to="/contact" className="inline-flex items-center gap-2 hover:text-primary">
+                <FontAwesomeIcon icon={faEnvelope} className="size-3" aria-hidden="true" />
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
@@ -43,14 +49,15 @@ export function Footer() {
             Ankorondrano, Antananarivo
             <a
               href="tel:+26134000000"
-              className="mt-3 inline-flex items-center gap-2 rounded-sm border border-emerald-400/50 bg-emerald-400/10 px-3 py-2 text-emerald-300 transition-colors hover:bg-emerald-400/20"
+              aria-label="Appeler Funbike au +261 34 00 000 00"
+              className="mt-2 inline-flex max-w-full items-center gap-1.5 rounded-sm border border-emerald-400/50 bg-emerald-400/10 px-2 py-1 text-[11px] leading-none text-emerald-300 transition-colors hover:bg-emerald-400/20"
             >
               <span className="relative flex size-2" aria-hidden="true">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-300 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-emerald-300" />
               </span>
-              <Phone size={14} aria-hidden="true" />
-              <span>+261 34 00 000 00 · Disponible</span>
+              <FontAwesomeIcon icon={faPhone} className="size-3" aria-hidden="true" />
+              <span className="truncate">+261 34 00 000 00 · Disponible</span>
             </a>
             <br />
             contact@funbike.mg
