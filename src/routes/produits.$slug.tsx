@@ -36,6 +36,8 @@ export const Route = createFileRoute("/produits/$slug")({
 function ProductPage() {
   const { product } = Route.useLoaderData() as { product: Product };
   const [active, setActive] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState("50% 50%");
   const category = findCategory(product.category);
   const related = products
     .filter((p) => p.category === product.category && p.slug !== product.slug)
@@ -57,7 +59,16 @@ function ProductPage() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="glass relative mx-auto aspect-[4/3] w-full max-w-4xl max-h-[min(58vh,620px)] overflow-hidden rounded-lg"
+              className="glass relative mx-auto aspect-[4/3] w-full max-w-4xl max-h-[min(58vh,620px)] overflow-hidden rounded-lg bg-surface-2"
+              onMouseMove={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+                const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+                setZoomOrigin(`${x}% ${y}%`);
+                setIsZoomed(true);
+              }}
+              onMouseLeave={() => setIsZoomed(false)}
+              onTouchStart={() => setIsZoomed(false)}
             >
               <AnimatePresence mode="sync">
                 <motion.img
@@ -66,11 +77,16 @@ function ProductPage() {
                   alt={`${product.name} — vue ${active + 1}`}
                   width={1024}
                   height={768}
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{
+                    transform: `scale(${isZoomed ? 1.8 : 1})`,
+                    transformOrigin: zoomOrigin,
+                    transition: "transform 420ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                  className="absolute inset-0 h-full w-full object-contain p-4 sm:p-6"
                 />
               </AnimatePresence>
             </motion.div>
