@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowDown, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import hero from "@/assets/hero-moto.jpg";
 import { Typewriter } from "./Typewriter";
 
@@ -125,13 +125,6 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-muted-foreground md:block"
-      >
-        <ArrowDown size={20} />
-      </motion.div>
     </section>
   );
 }
