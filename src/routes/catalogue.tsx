@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Bike, ShieldCheck, Wrench } from "lucide-react";
 import { PageHeader } from "@/components/funbike/PageHeader";
 import { ProductBrowser } from "@/components/funbike/ProductBrowser";
 import { categories } from "@/data/products";
@@ -74,7 +73,6 @@ function CataloguePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
-                  {c.slug === "motos" ? <Bike className="mb-3 size-5 text-ember" aria-hidden="true" /> : c.slug === "pieces" ? <Wrench className="mb-3 size-5 text-ember" aria-hidden="true" /> : <ShieldCheck className="mb-3 size-5 text-ember" aria-hidden="true" />}
                   <h2 className="font-display text-2xl font-bold leading-none md:text-[1.7rem]">{c.title}</h2>
                   <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     {c.sub}
