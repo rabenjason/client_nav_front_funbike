@@ -70,6 +70,13 @@ function ProductPage() {
               onMouseLeave={() => setIsZoomed(false)}
               onTouchStart={() => setIsZoomed(false)}
             >
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 scale-110 bg-cover bg-center opacity-35 blur-2xl"
+                style={{ backgroundImage: `url(${product.images[active]})` }}
+              />
+              <div aria-hidden="true" className="absolute inset-0 bg-background/35" />
+              <div className="absolute inset-3 rounded-md border border-foreground/10 bg-foreground/[0.03] shadow-inner shadow-foreground/5 sm:inset-6" />
               <AnimatePresence mode="sync">
                 <motion.img
                   key={product.images[active]}
