@@ -31,14 +31,20 @@ function Index() {
       <BrandMarquee />
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:py-28">
-        <Reveal>
-          <p className="eyebrow">Explorez par univers</p>
-          <h2 className="mt-4 text-[clamp(2.2rem,5vw,4rem)] font-bold">
-            Choisissez votre <span className="text-ember">terrain</span>
-          </h2>
-        </Reveal>
+        <div className="grid items-end gap-5 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
+          <Reveal>
+            <p className="eyebrow">Explorez par univers</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[0.95]">
+              Choisissez votre <span className="text-ember">terrain</span>
+            </h2>
+          </Reveal>
+          <p className="max-w-md text-sm leading-6 text-muted-foreground lg:pb-1">
+            Du premier trail à la compétition : tout ce qu&apos;il faut pour rouler,
+            réparer et se protéger.
+          </p>
+        </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {categories.map((c, i) => (
             <motion.div
               key={c.slug}

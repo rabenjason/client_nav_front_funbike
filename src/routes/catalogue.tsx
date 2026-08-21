@@ -35,7 +35,19 @@ function CataloguePage() {
       </PageHeader>
 
       <section className="mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-10 grid items-end gap-5 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
+          <div>
+            <p className="eyebrow">Explorez par univers</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[0.95]">
+              Choisissez votre <span className="text-ember">terrain</span>
+            </h2>
+          </div>
+          <p className="max-w-md text-sm leading-6 text-muted-foreground lg:pb-1">
+            Parcourez nos univers pour trouver la référence adaptée à votre usage.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {categories.map((c, i) => (
             <motion.div
               key={c.slug}
