@@ -59,7 +59,7 @@ function CataloguePage() {
             >
               <Link
                 to={`/${c.slug}` as "/motos"}
-                className="group relative block aspect-[4/3] overflow-hidden rounded-lg border border-border/60"
+                className="group relative block aspect-square overflow-hidden rounded-none border border-border/60"
               >
                 <motion.img
                   src={c.img}
