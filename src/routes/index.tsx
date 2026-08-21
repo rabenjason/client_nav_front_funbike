@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import { Bike, ShieldCheck, Wrench } from "lucide-react";
 import { Hero } from "@/components/funbike/Hero";
 import { BrandMarquee } from "@/components/funbike/BrandMarquee";
 import { Reveal } from "@/components/funbike/Reveal";
@@ -68,13 +69,13 @@ function Index() {
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="h-full w-full object-cover"
                 />
-                <div className="overlay-fade absolute inset-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
-                  <h3 className="text-2xl font-bold md:text-[1.7rem]">{c.title}</h3>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  {c.slug === "motos" ? <Bike className="mb-3 size-5 text-ember" aria-hidden="true" /> : c.slug === "pieces" ? <Wrench className="mb-3 size-5 text-ember" aria-hidden="true" /> : <ShieldCheck className="mb-3 size-5 text-ember" aria-hidden="true" />}
+                  <h3 className="font-display text-2xl font-bold leading-none md:text-[1.7rem]">{c.title}</h3>
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
                     {c.sub}
                   </p>
-                  <span className="mt-4 block h-px w-0 bg-ember transition-all duration-500 group-hover:w-full" />
                 </div>
               </Link>
             </motion.div>
